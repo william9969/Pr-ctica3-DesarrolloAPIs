@@ -14,18 +14,21 @@ import { NgForm, FormsModule, NgModel } from '@angular/forms';
 
 export class EmpleadoComponent implements OnInit {
   constructor(public empleadoService:EmpleadoService) { }
-  empleado: Empleado[] = [];
+  empleadosList: Empleado[] = [];
   ngOnInit(): void {
     this.getEmpleados();
   }
+
   getEmpleados() {
     this.empleadoService.getEmpleados().subscribe(
     res=>{
     this.empleadoService.empleados=res;
+    this.empleadosList=res;
     },
     err=>console.error(err)
     );
   }
+  
   addEmpleado(form:NgForm){
        
     this.empleadoService.createEmpleado(this.empleadoService.selectedEmpleado).subscribe(res=>{
@@ -36,7 +39,27 @@ export class EmpleadoComponent implements OnInit {
     );
   }
 
-  deleteEmpleado(empleaadoid:Empleado){
-    console.log(empleaadoid)
+  deleteEmpleado(empleaado:Empleado){
+    this.empleadoService.deleteEmpleado(empleaado._id).subscribe(res=>{
+    //this.empleadosList = this.empleadosList.filter(i => i._id !== empleaado._id)
+    this.getEmpleados()
+    },
+    err=>console.error(err)
+    );
+  }
+
+  setUpdateEmpleado(){
+  this.empleadoService.editarEmpleado(this.empleadoService.selectedEmpleado, this.empleadoService.selectedEmpleado._id).subscribe(res=>{
+      //this.empleadosList = this.empleadosList.filter(i => i._id !== empleaado._id)
+      this.getEmpleados()
+      },
+      err=>console.error(err)
+      );
+
+  }
+
+  updateEmpleado(empleado: Empleado){
+    this.empleadoService.selectedEmpleado = empleado
+     
   }
 }

@@ -30,7 +30,10 @@
     [(ngModel)]="empleadoService.selectedEmpleado.sueldo" [ngModelOptions]="{standalone: true}">
     </div>
     <button class="btn btn-primary">Crear</button>
+    
 </form>
+<br/>
+<button class="btn btn-secondary" (click)="setUpdateEmpleado()">Actualizar</button>
  </div>
  </div>
  </div>
@@ -43,11 +46,11 @@
  <th>Operaciones</th></tr>
  </thead>
  <tbody>
-<tr *ngFor="let empleado of empleadoService.empleados">
+<tr *ngFor="let empleado of empleadosList ">
  <td>{{empleado.nombre}}</td>
  <td>{{empleado.cargo}}</td>
  <td>{{empleado.departamento}}</td>
- <td><button class="btn btn-secondary">Actualizar</button>
+ <td><button class="btn btn-secondary" (click)="updateEmpleado(empleado)">Actualizar</button>
  <button class="btn btn-danger" (click)="deleteEmpleado(empleado)">Eliminar</button>
  </td>
  </tr>

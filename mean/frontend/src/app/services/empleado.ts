@@ -26,11 +26,11 @@ export class EmpleadoService {
     return this.http.post(this.URL_API+"/crearEmpleado",empleado);
   }
 
-  deleteEmpleado(id:String){
+  deleteEmpleado(id?:String){
     return this.http.delete(this.URL_API+"/eliminarEmpleado/"+id);
   }
 
-  editarEmpleado(empleado:Empleado, id:String){
+  editarEmpleado(empleado:Empleado, id?:String){
     return this.http.put(this.URL_API+"/editarEmpleado/"+id,empleado);
   }
 }
