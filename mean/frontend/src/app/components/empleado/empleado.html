@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<nav class="navbar bg-body-tertiary">
+ <div class="container-fluid">
+ <a class="navbar-brand" href="#">Gestión de Empleados Practica 3 - Sinchi W.</a>
+ </div>
+</nav>
+
+
+<div class="row">
+ <div class="col-md-4">
+ <div class="card">
+ <div class="card-body">
+ <h1>Registro de Nuevo Empleado</h1>
+ <form #empleadoForm="ngForm" (ngSubmit)="addEmpleado(empleadoForm)">
+    <div class="form-group">
+    <input type="text" class="form-control" placeholder="Ingrese su nombre" required="true"
+    [(ngModel)]="empleadoService.selectedEmpleado.nombre" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" placeholder="Ingrese su cargo" required="true"
+    [(ngModel)]="empleadoService.selectedEmpleado.cargo" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" placeholder="Ingrese su departamento" required="true"
+    [(ngModel)]="empleadoService.selectedEmpleado.departamento" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+    <input type="number" class="form-control" placeholder="Ingrese su sueldo" required="true"
+    [(ngModel)]="empleadoService.selectedEmpleado.sueldo" [ngModelOptions]="{standalone: true}">
+    </div>
+    <button class="btn btn-primary">Crear</button>
+</form>
+ </div>
+ </div>
+ </div>
+ <div class="col-md-8">
+ <table class="table table-striped">
+ <thead>
+ <tr><th>Nombre</th>
+ <th>Cargo</th>
+ <th>Departamento</th>
+ <th>Operaciones</th></tr>
+ </thead>
+ <tbody>
+<tr *ngFor="let empleado of empleadoService.empleados">
+ <td>{{empleado.nombre}}</td>
+ <td>{{empleado.cargo}}</td>
+ <td>{{empleado.departamento}}</td>
+ <td><button class="btn btn-secondary">Actualizar</button>
+ <button class="btn btn-danger" (click)="deleteEmpleado(empleado)">Eliminar</button>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+</div>
